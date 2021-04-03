@@ -1,30 +1,35 @@
 package ru.geekbrains.app;
 
 public class Product {
-    private int _id = 0;
-    private String _title = "";
-    private float _cost = 0.0f;
+    private int id = 0;
+    private String title = "";
+    private float cost = 0.0f;
 
     public Product(int id, String title, float cost) {
-        _id = id;
-        _title = title;
-        _cost = cost;
+        if (title == null || title.isEmpty())
+            throw new IllegalArgumentException("title");
+        if (cost < 0.0)
+            throw new IllegalArgumentException("cost");
+
+        this.id = id;
+        this.title = title;
+        this.cost = cost;
     }
 
     public int getId() {
-        return _id;
+        return this.id;
     }
 
     public String getTitle() {
-        return _title;
+        return this.title;
     }
 
     public float getCost() {
-        return _cost;
+        return this.cost;
     }
 
     @Override
     public String toString() {
-        return String.format("%d. '%s' %2.2f$", _id, _title, _cost);
+        return String.format("%d. '%s' %2.2f$", this.id, this.title, this.cost);
     }
 }
