@@ -16,16 +16,6 @@ public class ProductServlet extends HttpServlet {
     private static final Logger logger = LoggerFactory.getLogger(ProductServlet.class);
 
     @Override
-    public void init() throws ServletException {
-        logger.debug("Init");
-    }
-
-    @Override
-    public void destroy() {
-        logger.debug("Destroy");
-    }
-
-    @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         logger.info("Log: GET");
         resp.setContentType("text/html");
@@ -49,11 +39,4 @@ public class ProductServlet extends HttpServlet {
         }
         out.printf("</body>\n</html>");
     }
-
-    /*
-    @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        logger.debug("Log: POST");
-        resp.getWriter().printf("<html><body><h1>New POST request</h1></body></html>");
-    }*/
 }
