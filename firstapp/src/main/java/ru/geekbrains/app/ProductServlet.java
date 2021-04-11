@@ -29,7 +29,7 @@ public class ProductServlet extends HttpServlet {
         out.printf("<h1>Products</h1>\n");
         out.printf("<p>Automatically generated products</p>\n");
         for (int i = 0; i < 10; i++) {
-            Product product = new Product(i + 1, String.format("Product - %d", i), 1.5f * (i + 1));
+            Product product = new ProductImpl(i + 1, String.format("ProductImpl - %d", i), 1.5f * (i + 1));
 
             out.printf("<div>");
             out.printf("<p>");
