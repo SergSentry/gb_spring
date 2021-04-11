@@ -9,6 +9,7 @@ import javax.annotation.PostConstruct;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 
 @Component("products")
 @Scope("singleton")
@@ -26,13 +27,13 @@ public class ProductRepositoryImpl implements ProductRepository {
         ));
     }
 
-    public Product getById(int id) {
+    public Optional<Product> getById(int id) {
         for (Product product : this.products) {
             if (product.getId() == id)
-                return product;
+                return Optional.of(product);
         }
 
-        return null;
+        return Optional.empty();
     }
 
     public List<Product> getProducts() {

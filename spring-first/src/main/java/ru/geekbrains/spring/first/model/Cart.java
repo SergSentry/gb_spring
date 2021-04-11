@@ -7,6 +7,7 @@ import ru.geekbrains.spring.first.repositories.ProductRepository;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Component()
 @Scope("prototype")
@@ -21,9 +22,9 @@ public class Cart {
     }
 
     public boolean attachProduct(int id) {
-        Product product = this.productRepository.getById(id);
-        if (product != null) {
-            products.add(product);
+        Optional<Product> product = this.productRepository.getById(id);
+        if (product.isPresent()) {
+            products.add(product.get());
             return true;
         }
 
@@ -31,9 +32,9 @@ public class Cart {
     }
 
     public boolean detachProduct(int id) {
-        Product product = this.productRepository.getById(id);
-        if (product != null) {
-            products.remove(product);
+        Optional<Product> product = this.productRepository.getById(id);
+        if (product.isPresent()) {
+            products.remove(product.get());
             return true;
         }
 

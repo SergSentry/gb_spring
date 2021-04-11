@@ -6,6 +6,7 @@ import ru.geekbrains.spring.first.model.Product;
 import ru.geekbrains.spring.first.repositories.ProductRepository;
 
 import java.util.List;
+import java.util.Optional;
 
 @Component
 public class ProductServiceImpl implements ProductService {
@@ -19,5 +20,10 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public List<Product> getAll() {
         return this.productRepository.getProducts();
+    }
+
+    @Override
+    public Optional<Product> getById(int id) {
+        return this.productRepository.getById(id);
     }
 }
