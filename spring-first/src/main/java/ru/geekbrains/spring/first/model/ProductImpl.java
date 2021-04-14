@@ -1,7 +1,5 @@
 package ru.geekbrains.spring.first.model;
 
-import ru.geekbrains.spring.first.model.Product;
-
 public class ProductImpl implements Product {
     private final int id;
     private final String title;
