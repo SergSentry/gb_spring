@@ -87,4 +87,13 @@ public class StudentController {
         studentService.addScoreById(id);
         return "redirect:/";
     }
+
+    @PostMapping("/students/search")
+    public String searchStudentInfo(@RequestParam Long id, Model model) {
+        Optional<Student> student = studentService.findOneById(id);
+        if (student.isPresent()) {
+            model.addAttribute("student", student.get());
+        }
+        return "student_info";
+    }
 }

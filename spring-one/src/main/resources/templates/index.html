@@ -20,12 +20,31 @@
             padding: 8px auto;
             text-align: center;
          }
+         .head_container {
+            display: flex;
+            margin: 16px;
+            flex-direction: row;
+            justify-content: space-between;
+            align-items: center;
+         }
+         .head_search_input {
+            margin: 4px;
+         }
+
+
+
     </style>
 </head>
 
 <body>
 <div class="container">
-    <h1>Ведомость</h1>
+    <div class="head_container">
+        <h1>Ведомость</h1>
+        <form class="head_container" method="POST" th:action="@{/students/search}">
+            <input type="number" class="form-control" id="idField" name="id">
+            <button type="submit" class="btn btn-primary">Найти</button>
+        </form>
+    </div>
     <table class="table table-hover">
         <thead>
         <tr>
