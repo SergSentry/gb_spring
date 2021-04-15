@@ -42,28 +42,6 @@ public class StudentController {
         return "create_student_form";
     }
 
-//    [http://localhost:8189/app]/students/create?id=10&name=Nicolas&score=95
-//    @PostMapping("/create")
-//    public String createNewStudent(@RequestParam Long id, @RequestParam String name, @RequestParam int score) {
-//        Student student = new Student(id, name, score);
-//        studentService.save(student);
-//        return "redirect:/students/all";
-//    }
-
-    // POST [http://localhost:8189/app]/students/create
-    // body: id=10&name=Nicolas&score=95
-    // public class Student {
-    //    private Long id;
-    //    private String name;
-    //    private int score;
-
-    // Student student = new Student();
-    // requestparam: id=10
-    // student.set[Id](10);
-    // requestparam: name=10
-    // student.set[Name](Nicolas);
-    // requestparam: score=95
-    // student.set[Score](95);
     @PostMapping("/students/create")
     public String createNewStudent(@ModelAttribute Student student) {
         studentService.save(student);
