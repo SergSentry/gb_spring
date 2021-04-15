@@ -75,4 +75,16 @@ public class StudentController {
         studentService.deleteById(id);
         return "redirect:/";
     }
+
+    @GetMapping("/students/score/sub/{id}")
+    public String subScoreStudentById(@PathVariable Long id) {
+        studentService.subScoreById(id);
+        return "redirect:/";
+    }
+
+    @GetMapping("/students/score/add/{id}")
+    public String addScoreStudentById(@PathVariable Long id) {
+        studentService.addScoreById(id);
+        return "redirect:/";
+    }
 }
