@@ -37,4 +37,28 @@ public class StudentService {
     public double getAverageScore() {
         return studentRepository.findAll().stream().mapToInt(Student::getScore).average().getAsDouble();
     }
+
+    public void subScoreById(Long id) {
+        Optional<Student> optionalStudent = studentRepository.findOneById(id);
+        if (optionalStudent.isPresent()) {
+            Student student = optionalStudent.get();
+            int studentOldScore = student.getScore();
+            if (studentOldScore - 1 >= 0)
+            {
+                student.setScore(studentOldScore - 1);
+            }
+        }
+    }
+
+    public void addScoreById(Long id) {
+        Optional<Student> optionalStudent = studentRepository.findOneById(id);
+        if (optionalStudent.isPresent()) {
+            Student student = optionalStudent.get();
+            int studentOldScore = student.getScore();
+            if (studentOldScore + 1 <= 100)
+            {
+                student.setScore(studentOldScore + 1);
+            }
+        }
+    }
 }
