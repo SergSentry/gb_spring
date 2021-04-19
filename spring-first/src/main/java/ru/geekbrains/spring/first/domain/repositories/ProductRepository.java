@@ -1,6 +1,6 @@
-package ru.geekbrains.spring.first.repositories;
+package ru.geekbrains.spring.first.domain.repositories;
 
-import ru.geekbrains.spring.first.model.Product;
+import ru.geekbrains.spring.first.domain.model.Product;
 
 import java.util.List;
 import java.util.Optional;

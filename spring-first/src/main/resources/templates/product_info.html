@@ -38,7 +38,7 @@
                 <div th:if="${product != null}">
                     <h5 th:text="${'ID: ' + product.Id}"/>
                     <h5 th:text="${'Наименование: ' + product.Title}"/>
-                    <h5 th:text="${'Стоимость: ' + product.Cost}"/>
+                    <h5 th:text="${'Стоимость: ' + product.Price}"/>
                 </div>
                 <div th:if="${product == null}">
                     <h5>Такого продукта не существует. Проверьте ID</h5>
