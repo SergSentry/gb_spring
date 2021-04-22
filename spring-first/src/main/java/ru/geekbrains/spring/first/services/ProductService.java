@@ -1,6 +1,6 @@
 package ru.geekbrains.spring.first.services;
 
-import ru.geekbrains.spring.first.model.Product;
+import ru.geekbrains.spring.first.domain.model.Product;
 
 import java.util.List;
 import java.util.Optional;

@@ -6,7 +6,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
-import ru.geekbrains.spring.first.model.Product;
+import ru.geekbrains.spring.first.domain.model.Product;
 import ru.geekbrains.spring.first.services.ProductService;
 
 import java.util.List;
