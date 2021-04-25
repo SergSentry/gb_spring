@@ -3,13 +3,11 @@ package ru.geekbrains.spring.one.services;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ru.geekbrains.spring.one.model.Product;
 import ru.geekbrains.spring.one.repositories.ProductRepository;
 
-import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -23,6 +21,10 @@ public class ProductService {
 
     public Page<Product> findAll(int page, int size) {
         return productRepository.findAll(PageRequest.of(page, size));
+    }
+
+    public Page<Product> findAllByPriceBetween(int minPrice, int maxPrice, int page, int size) {
+        return productRepository.findAllByPriceBetween(minPrice, maxPrice, PageRequest.of(page, size));
     }
 
     public Optional<Product> findOneById(Long id) {

@@ -12,6 +12,19 @@
 <body>
 <div class="container">
     <h1>Каталог</h1>
+    <div class="container">
+        <form method="POST" th:action="@{/}">
+            <div class="mb-3">
+                <label for="minPriceField" class="form-label">Мин.цена</label>
+                <input type="number" class="form-control" id="minPriceField" name="minPrice">
+            </div>
+            <div class="mb-3">
+                <label for="maxPriceField" class="form-label">Макс.цена</label>
+                <input type="number" class="form-control" id="maxPriceField" name="maxPrice">
+            </div>
+            <button type="submit" class="btn btn-primary">Найти</button>
+        </form>
+    </div>
     <table class="table table-hover">
         <thead>
         <tr>
