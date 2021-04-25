@@ -8,7 +8,6 @@ import ru.geekbrains.spring.one.model.Product;
 import ru.geekbrains.spring.one.services.ProductService;
 
 import java.util.List;
-import java.util.Optional;
 
 @Controller
 public class ProductController {
@@ -20,8 +19,8 @@ public class ProductController {
     }
 
     @GetMapping("/")
-    public String showAllProductsPage(Model model) {
-        List<Product> products = productService.findAll();
+    public String showProductsPage(@RequestParam(required = false, defaultValue = "all") String category, Model model) {
+        List<Product> products = category.equals("all") ? productService.findAll() : productService.findByCategory(category);
         model.addAttribute("products", products);
         return "index";
     }
@@ -29,7 +28,7 @@ public class ProductController {
     @GetMapping("/products/{id}")
     public String showProductInfo(@PathVariable(name = "id") Long id, Model model) {
         productService.findOneById(id).ifPresent(p -> model.addAttribute("product", p));
-        return "student_info";
+        return "product_info";
     }
 
     @GetMapping("/products/add")

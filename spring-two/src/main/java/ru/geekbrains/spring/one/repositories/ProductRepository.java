@@ -51,4 +51,13 @@ public class ProductRepository {
             session.getTransaction().commit();
         }
     }
+
+    public List<Product> findByCategory(String category) {
+        try (Session session = hibernateUtils.getCurrentSession()) {
+            session.beginTransaction();
+            List<Product> products = session.createQuery("from Product p where p.category.title = '" + category + "'").getResultList();
+            session.getTransaction().commit();
+            return products;
+        }
+    }
 }
