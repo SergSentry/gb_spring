@@ -1,5 +1,9 @@
 package ru.geekbrains.spring.one.repositories;
 
+import com.fasterxml.jackson.databind.deser.impl.CreatorCandidate;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
@@ -14,7 +18,7 @@ import java.util.Optional;
 public interface ProductRepository extends JpaRepository<Product, Long> {
 //    Optional<Product> findOneByTitle(String title);
 //    List<Product> findAllByPriceLessThan(int price);
-//    List<Product> findAllByPriceBetween(int min, int max);
+Page<Product> findAllByPriceBetween(int min, int max, Pageable pageable);
 //    List<Product> findAllByIdLessThanAndPriceGreaterThan(Long maxId, int minPrice);
 //    @Query("select p from Product p where p.id = :id")
 //    List<Product> hqlFindById(Long id);

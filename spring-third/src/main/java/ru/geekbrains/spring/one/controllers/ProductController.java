@@ -28,6 +28,13 @@ public class ProductController {
         return "index";
     }
 
+    @PostMapping("/")
+    public String createNewProduct(@RequestParam(defaultValue = "0") int minPrice, @RequestParam(defaultValue = "1000") int maxPrice, Model model) {
+        Page<Product> page = productService.findAllByPriceBetween(minPrice, maxPrice, 0, 5);
+        model.addAttribute("page", page);
+        return "index";
+    }
+
     @GetMapping("/products/{id}")
     public String showProductInfo(@PathVariable(name = "id") Long id, Model model) {
         productService.findOneById(id).ifPresent(p -> model.addAttribute("product", p));
