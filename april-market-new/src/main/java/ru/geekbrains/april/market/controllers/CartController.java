@@ -15,7 +15,6 @@ import java.util.List;
 @Slf4j
 public class CartController {
     private final Cart cart;
-    private final ProductService productService;
 
     @GetMapping("/ping")
     public void ping(@RequestParam Long id) {

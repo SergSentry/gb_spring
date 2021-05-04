@@ -40,9 +40,12 @@ angular.module('app', []).controller('indexController', function ($scope, $http)
         $http({
               url: contextPath + '/api/v1/cart/add',
               method: 'POST',
-              params: product
-              }
+              data: product
         }).then(function (response) {
+                $http.get(contextPath + '/api/v1/cart')
+                    .then(function (response) {
+                        $scope.cart_products = response.data;
+                });
                 console.log("OK");
         });
     }
@@ -51,8 +54,13 @@ angular.module('app', []).controller('indexController', function ($scope, $http)
     $scope.clearCart = function (productId) {
         $http({
               url: contextPath + '/api/v1/cart/clear',
-              method: 'POST'
+              method: 'POST',
+              data: ''
         }).then(function (response) {
+                $http.get(contextPath + '/api/v1/cart')
+                    .then(function (response) {
+                        $scope.cart_products = response.data;
+                });
                 console.log("OK");
         });
     }
