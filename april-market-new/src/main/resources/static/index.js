@@ -36,5 +36,26 @@ angular.module('app', []).controller('indexController', function ($scope, $http)
         });
     }
 
+    $scope.addProductToCart = function (product) {
+        $http({
+              url: contextPath + '/api/v1/cart/add',
+              method: 'POST',
+              params: product
+              }
+        }).then(function (response) {
+                console.log("OK");
+        });
+    }
+
+
+    $scope.clearCart = function (productId) {
+        $http({
+              url: contextPath + '/api/v1/cart/clear',
+              method: 'POST'
+        }).then(function (response) {
+                console.log("OK");
+        });
+    }
+
     $scope.init();
 });
