@@ -16,5 +16,17 @@ public class Cart {
         items = new ArrayList<>();
     }
 
+    public List<Product> getItems() {
+        return items;
+    }
 
+    public void addProduct(Product product) {
+        if (product == null)
+            throw new IllegalArgumentException("product");
+        items.add(product);
+    }
+
+    public void clear() {
+        items.clear();
+    }
 }
