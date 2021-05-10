@@ -34,7 +34,7 @@
             <td>
                 <button class="btn btn-danger" ng-click="clickOnProduct(p)">Console info??</button>
                 <button class="btn btn-danger" ng-click="pingProduct(p.id)">Ping</button>
-                <button class="btn btn-primary" ng-click="addProductToCart(p)">Add to cart</button>
+                <button class="btn btn-primary" ng-click="addProductToCart(p.id)">Add to cart</button>
             </td>
         </tr>
         </tbody>
@@ -59,6 +59,10 @@
     <div>
         <span>Cart</span>
         <table class="table">
+            <caption>
+                <span>Total price:</span>
+                <span ng-bind="cart_total_price"></span>
+            </caption>
             <thead>
             <tr>
                 <th scope="col">ID</th>
