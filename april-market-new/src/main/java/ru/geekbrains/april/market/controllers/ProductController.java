@@ -2,18 +2,18 @@ package ru.geekbrains.april.market.controllers;
 
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.ObjectError;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
-import ru.geekbrains.april.market.error_handling.MarketError;
+import ru.geekbrains.april.market.dtos.ProductDto;
+import ru.geekbrains.april.market.error_handling.InvalidDataException;
 import ru.geekbrains.april.market.error_handling.ResourceNotFoundException;
 import ru.geekbrains.april.market.models.Product;
 import ru.geekbrains.april.market.services.ProductService;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
+import java.util.stream.Collectors;
 
 @RestController
 @RequiredArgsConstructor
@@ -22,34 +22,27 @@ public class ProductController {
     private final ProductService productService;
 
     @GetMapping
-    public List<Product> getAllProducts() {
-        return productService.findAll();
+    public List<ProductDto> getAllProducts() {
+        return productService.findAll().stream().map(ProductDto::new).collect(Collectors.toUnmodifiableList());
     }
 
     @GetMapping("/{id}")
-    public Product getOneProductById(@PathVariable Long id) {
-        return productService.findById(id).orElseThrow(() -> new ResourceNotFoundException("Product doesn't exists: " + id));
+    public ProductDto getOneProductById(@PathVariable Long id) {
+        Product product = productService.findById(id).orElseThrow(() -> new ResourceNotFoundException("Product doesn't exists: " + id));
+        return new ProductDto(product);
     }
 
     @PostMapping
-    public ResponseEntity<?> createNewProduct(@RequestBody Product product) {
-        List<String> errors = new ArrayList<>();
-        if (product.getTitle().length() < 3) {
-            errors.add("Too short title");
+    public ProductDto createNewProduct(@RequestBody @Validated ProductDto productDto, BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) {
+            throw new InvalidDataException(bindingResult.getAllErrors().stream().map(ObjectError::getDefaultMessage).collect(Collectors.toList()));
         }
-        if (product.getPrice() < 1) {
-            errors.add("Invalid product price");
-        }
-        if (errors.size() > 0) {
-            return new ResponseEntity<>(new MarketError(HttpStatus.BAD_REQUEST.value(), errors), HttpStatus.BAD_REQUEST);
-        }
-        Product out = productService.save(product);
-        return new ResponseEntity<>(out, HttpStatus.CREATED);
+        return productService.createNewProduct(productDto);
     }
 
     @PutMapping
-    public void update(@RequestBody Product product) {
-        productService.save(product);
+    public ProductDto updateProduct(@RequestBody ProductDto productDto) {
+        return productService.updateProduct(productDto);
     }
 
     @DeleteMapping("/{id}")

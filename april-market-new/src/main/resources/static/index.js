@@ -36,31 +36,32 @@ angular.module('app', []).controller('indexController', function ($scope, $http)
         });
     }
 
-    $scope.addProductToCart = function (product) {
+    $scope.addProductToCart = function (productId) {
         $http({
               url: contextPath + '/api/v1/cart/add',
               method: 'POST',
-              data: product
+              params: {
+                  id: productId
+              }
         }).then(function (response) {
                 $http.get(contextPath + '/api/v1/cart')
                     .then(function (response) {
-                        $scope.cart_products = response.data;
+                        $scope.cart_products = response.data.products;
+                        $scope.cart_total_price = response.data.totalPrice;
                 });
                 console.log("OK");
         });
     }
 
 
-    $scope.clearCart = function (productId) {
+    $scope.clearCart = function () {
         $http({
               url: contextPath + '/api/v1/cart/clear',
               method: 'POST',
               data: ''
         }).then(function (response) {
-                $http.get(contextPath + '/api/v1/cart')
-                    .then(function (response) {
-                        $scope.cart_products = response.data;
-                });
+                $scope.cart_products = null;
+                $scope.cart_total_price = 0;
                 console.log("OK");
         });
     }
