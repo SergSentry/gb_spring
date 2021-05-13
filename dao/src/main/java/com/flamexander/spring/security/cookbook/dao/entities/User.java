@@ -1,6 +1,5 @@
 package com.flamexander.spring.security.cookbook.dao.entities;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -25,8 +24,8 @@ public class User {
     private String email;
 
     @ManyToMany
-    @JoinTable(name = "users_roles",
+    @JoinTable(name = "users_permissions",
             joinColumns = @JoinColumn(name = "user_id"),
-            inverseJoinColumns = @JoinColumn(name = "role_id"))
-    private Collection<Role> roles;
+            inverseJoinColumns = @JoinColumn(name = "permission_id"))
+    private Collection<Permission> permissions;
 }

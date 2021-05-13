@@ -6,8 +6,8 @@ import javax.persistence.*;
 
 @Entity
 @Data
-@Table(name = "roles")
-public class Role {
+@Table(name = "permissions")
+public class Permission {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")

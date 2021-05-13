@@ -6,29 +6,31 @@ create table users (
   primary key (id)
 );
 
-create table roles (
+create table permissions (
   id                    serial,
-  name                  varchar(50) not null,
+  name                  varchar(100) not null,
   primary key (id)
 );
 
-CREATE TABLE users_roles (
+CREATE TABLE users_permissions (
   user_id               bigint not null,
-  role_id               int not null,
-  primary key (user_id, role_id),
+  permission_id            int not null,
+  primary key (user_id, permission_id),
   foreign key (user_id) references users (id),
-  foreign key (role_id) references roles (id)
+  foreign key (permission_id) references permissions (id)
 );
 
-insert into roles (name)
+insert into permissions (name)
 values
-('ROLE_USER'), ('ROLE_ADMIN');
+('PERMISSION_ALL'), ('PERMISSION_READ_USER_INFO');
 
 insert into users (username, password, email)
 values
-('user', '$2a$04$Fx/SX9.BAvtPlMyIIqqFx.hLY2Xp8nnhpzvEEVINvVpwIPbA3v/.i', 'user@gmail.com');
+('user', '$2a$04$Fx/SX9.BAvtPlMyIIqqFx.hLY2Xp8nnhpzvEEVINvVpwIPbA3v/.i', 'user@gmail.com'),
+('admin', '$2a$04$Fx/SX9.BAvtPlMyIIqqFx.hLY2Xp8nnhpzvEEVINvVpwIPbA3v/.i', 'admin@gmail.com');
 
-insert into users_roles (user_id, role_id)
+insert into users_permissions (user_id, permission_id)
 values
-(1, 1),
-(1, 2);
+(1, 2),
+(2, 1),
+(2, 2);
